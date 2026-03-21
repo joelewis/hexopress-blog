@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Type System of the Future — my-blog</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="site-title">my-blog</a>
+            <a href="/archive/">Archive</a>
+        </nav>
+    </header>
+    <main>
+        
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">The Type System of the Future</h1>
+        <time class="post-date" datetime="2023-03-27">
+            March 27, 2023
+        </time>
+    </header>
+    <div class="post-content">
+        <h1 id="heading"></h1>
+<p><a href="#strongly-typed-vs-more-strongly-typed">Strongly typed vs More-strongly typed</a></p>
+<p><a href="#what-are-types-really?">What are Types really?</a></p>
+<p><a href="#the-twin-faces-of-types">The twin faces of Types</a></p>
+<p><a href="#the-world-of-statically-verified-languages">The world of statically verified languages</a>dd</p>
+<h1 id="strongly-typed-vs-more-strongly-typed-strongly-typed-vs-more-strongly-typed">Strongly typed vs More-strongly typed {#strongly-typed-vs-more-strongly-typed}</h1>
+<p>We know types help us eliminate certain classes of errors from programs. For instance, it's impossible to write an executable program in Java that adds a string to a number. If you’re a big company already using Java, you’ve hypothetically saved some significant amount of $$$ in terms of developer productivity. But we still lose $$$ with the most <a href="https://en.wikipedia.org/wiki/Tony_Hoare#cite_note-23">expensive mistake ever made</a> in the software industry - Null. I'm pretty sure while you are reading this, at least one programmer across the world is either running into a null access exception or debugging one!</p>
+<p>What I've really found is that type-checking is an incremental concept. As in, for every strongly typed language, there's going to be a <strong>stronger</strong>-typed language. The interesting question is, what will happen if we push this to its extreme. Can I write a program that is free of all classes of errors? Can there be a language that eliminates the possibility of making <em>any</em> mistakes in your program? Of course, it'd be a nightmare to even code in such a strict language but it nevertheless is an interesting question to ask!</p>
+<h1 id="what-are-types-really-what-are-types-really">What are Types really? {#what-are-types-really?}</h1>
+<p>For the answer to be obvious let's step back and dig a little deeper into what Types really are?</p>
+<p>Surprisingly, Types didn't originate from the computer science industry. It actually came from mathematics! The type system is just one of the many secret affairs computer science had with math.</p>
+<p>Consider the phrase &quot;<strong>I'm lying&quot;.</strong> How will you communicate that intention to a computer or an alien? You convert the phrase to math. It'd become</p>
+<p><em>&quot;For any proposition p that I affirm, p is not true&quot;</em></p>
+<p>But wait, <strong>&quot;I'm lying&quot;</strong> is a proposition itself. If this proposition is p, then &quot;I'm lying&quot; is not true too. So now we've ended up with an error. If he claims he's lying, the alien will understand everything he's saying is true - which defeats the entire point.</p>
+<p>Here's another such error:</p>
+<p><strong>A barber in a village shaves all men who don’t shave themselves. Now the question is, who shaves the barber?</strong></p>
+<p>If the barber shaves himself then he comes under the category of people who shave themselves, so he shouldn't shave himself. But if he doesn't shave himself then he comes under &quot;people who won't shave themselves&quot; and therefore should shave himself!</p>
+<p>We've ended up with a paradox. Actually a pretty famous one at that. It's called <a href="https://en.wikipedia.org/wiki/Russell%27s_paradox">Russell's paradox</a>. Russell tried to base all of mathematics on top of logic and was troubled by this paradox.</p>
+<p>He came up with something awesome. He went into Zen-like mode and said there simply cannot exist a predicate (I'm lying) that includes everything. There should be a class of results that hold true for a predicate and he called them, Types.</p>
+<p>For example the &quot;I'm lying&quot; proposition holds true for all propositions I say, except that one. &quot;The barber shaves all who don’t shave themselves&quot; holds true for all men, except the barber. These are valid exceptions because they are of higher-order! (If the term higher-order rings a bell, it's because this is how first-order logic and higher-order logic was born)</p>
+<p>This is just like how when we write <em>int sum (int, int);</em> we say <em>sum()</em> is a function, but that function only holds true for inputs of type <em>(int, int)</em>. See the analogy? This is where we stole types from.</p>
+<h1 id="the-twin-faces-of-types-the-twin-faces-of-types">The twin faces of Types {#the-twin-faces-of-types}</h1>
+<p>Remember our original question? Is it possible to write programs that won't allow us to make any mistakes? We dug into the history of Types because as you can see <a href="https://www.cs.kent.ac.uk/people/staff/srk21/research/papers/kell14in-author-version.pdf">what type means in math is (though similar) very much more than what we call datatypes in software</a>. It implies we can do better than just data-types.</p>
+<p>For a function f(x) = x*x that outputs the square of its input, current languages that we use allow us to express that the function takes in only integer values and not strings. i.e the data-type of arguments.</p>
+<p>Is there a language with a type system powerful enough to express that the function adheres to the constraint: for every input the result will be the square of the input?</p>
+<p>If such an arrangement exists, then it's safe to assume that a language in which no erroneous programs will exist is possible. This is where the deeper meaning of Types in math, helps. While Russell proposed the <a href="https://plato.stanford.edu/entries/type-theory/">Ramified theory of types</a> to contain paradoxes, following his lead a new theory emerged - <a href="https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf">Proposition as types</a> by <a href="https://en.wikipedia.org/wiki/L._E._J._Brouwer">Brouwer</a>.</p>
+<p>This theory says that any proposition has a type. The type of the proposition is the proof of the proposition. For example, consider the proposition: &quot;Chennai is in India&quot;</p>
+<p>The proof is based on the below facts. Let's call it, Proof-A.</p>
+<p>Chennai is in Tamil Nadu. ( Chennai ⊆ TamilNadu )</p>
+<p>Tamil Nadu is in India. ( Tamil Nadu ⊆ India )</p>
+<p>So Chennai ⊆ India is true by <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitivity</a>.</p>
+<p>Here the proposition &quot;Chennai is in India&quot; is of the type &quot;Proof-A&quot;. This proof part is interesting because this proof is nothing but some logic, that is in-fact closely related to a computer program. This is another interesting observation. It's called the <a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence">Curry-Howard isomorphism</a>. Curry observed that the properties of a proof in Logic, is very similar to the properties of a computer program.</p>
+<p>And that is again how math and computer science is married again!</p>
+<h1 id="the-world-of-statically-verified-languages-the-world-of-statically-verified-languages">The world of statically verified languages {#the-world-of-statically-verified-languages}</h1>
+<p>So <em>it is possible</em> to statically verify that a function always returns the square of its input, it just needs a proof (aka its type). And as Curry observed, proofs are nothing but computer programs, except that they work with facts from the compile-time, instead of the runtime!</p>
+<p>For example, you can write a proof that your <em>sort()</em> function, can never return an unsorted collection. And the compiler will run your verification at compile-time and guarantee that for you. Much like unit tests, but at compile-time.</p>
+<p>As expected, there are programming languages out there, that use this Curry-Howard isomorphism to statically verify its correctness. Languages like <a href="https://coq.inria.fr/">CoQ</a>, <a href="https://github.com/agda/agda">Agda</a>, <a href="https://www.idris-lang.org/">Idris</a>. Folks use these languages to build mission-critical software for rockets and airplanes, but the rocket-sciency nature of these languages is stopping the general business world from adopting these languages.</p>
+<p>I have a strong feeling that the industry will slowly drift towards languages like these that have a type system powerful enough to express the logic itself as statically-verifiable types. A world where every library I use is statically verified and proved to be correct will be an awesome world to live in!</p>
+<p>Edits</p>
+<ol>
+<li>Grammatical mistakes</li>
+<li>Wrong links</li>
+</ol>
+
+    </div>
+    <footer class="post-footer">
+        <a href="/">&larr; Back to home</a>
+    </footer>
+</article>
+
+    </main>
+    <footer>
+        <p>Powered by <a href="https://github.com/joehewett/hexopress-mcp">HexoPress</a></p>
+    </footer>
+</body>
+</html>
